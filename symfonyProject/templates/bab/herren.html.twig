@@ -1,0 +1,65 @@
+{% extends 'bab/layout.html.twig' %}
+{% block title %}Blog Index{% endblock %}
+{% block page_contents %}
+    <nav class="navbar bg-light">
+        <div class="container">
+            <a href="/bab" class="navbar-brand">
+                <img src="/images/sdf.png" alt="" width="50" height="24">
+            </a>
+        </div>
+    </nav>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Warenkorb</a>
+        </li>
+    </ul>
+    <div class="container" style="text-align:center">
+    <br>
+    <div class="row align-items-start">
+        <div class="col" >
+            <h3><a href="/herren"class="link-blue"> Herren</a></h3>
+        </div>
+        <div class="col" >
+            <h3><a href="/damen" class="link-dark"> Damen</a></h3>
+        </div>
+        <div class="col" >
+            <h3><a href="/kinder"class="link-dark"> Kinder</a></h3>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-start">
+    <div class="col-2">
+        <nav class="nav flex-column">
+            <a class="nav-link" href="#">Accessoires</a>
+            <a class="nav-link" href="#">Jacke</a>
+            <a class="nav-link" href="#">Pullover</a>
+            <a class="nav-link" href="#">T-Shirt</a>
+            <a class="nav-link" href="#">Hose</a>
+            <a class="nav-link" href="#">Schuhe</a>
+
+        </nav>
+    </div>
+    <div class="col-9">
+        <img src="/images/kleidungHaupt.jpg" class="card-img-top" alt="..." height="420">
+    </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" style="text-align:center">
+        {% for article in articles %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/season.png" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.body}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
