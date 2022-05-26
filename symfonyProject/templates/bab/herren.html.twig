@@ -62,4 +62,19 @@
             </div>
         {% endfor %}
     </div>
+    <br>
+    <br>
+    <h5> Die Daten {response} ! </h5>
+    <div class="row" style="text-align:center">
+    {% for data in response %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ data}}</h5>
+                    <p class="card-text">{{ data }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}
