@@ -32,7 +32,7 @@ class Bab extends AbstractController
     public function number1(): Response
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.wheretheiss.at/v1/satellites/25544');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=-75.3&lon=-0.07&appid=52f93fcb3972dd3f203176c66178aa35');
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
         $contentType = $response->getHeaders()['content-type'][0];
@@ -41,9 +41,7 @@ class Bab extends AbstractController
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-
-
-
+        $content["main"]["temp"]=$content["main"]["temp"]-273.15;
         $articles = [
             '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
             '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
