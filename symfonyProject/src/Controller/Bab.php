@@ -32,7 +32,7 @@ class Bab extends AbstractController
     public function number1(): Response
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=-75.3&lon=-0.07&appid=52f93fcb3972dd3f203176c66178aa35');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=49.5&lon=8.47&appid=52f93fcb3972dd3f203176c66178aa35');
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
         $contentType = $response->getHeaders()['content-type'][0];
