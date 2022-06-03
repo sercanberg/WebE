@@ -1,4 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    {% block page_contents %}{% endblock %}
+    <nav class="navbar bg-light">
+        <div class="container">
+            <a href="/bab" class="navbar-brand">
+                <img src="/images/sdf.png" alt="" width="50" height="24">
+            </a>
+        </div>
+    </nav>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Warenkorb</a>
+        </li>
+    </ul>
+    {% block page_contents %}
+    {% endblock %}
 {% endblock %}
