@@ -28,9 +28,9 @@
 
         </nav>
     </div>
-    <div class="col-9">
-        <img src="/images/maennermode.jpeg" class="card-img-top" alt="..." height="500">
-    </div>
+        <div class="col-9">
+            <img src="/images/maennermode.jpeg" class="card-img-top" alt="..." height="480">
+        </div>
     </div>
     <br>
     <br>
@@ -38,19 +38,18 @@
         {% for article in articles %}
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="/images/season.png" class="card-img-top">
+                    <img src="/images/sdf.png" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text">{{ article.body}}</p>
+                        <p class="card-text">{{ article.body }}</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-    <br>
-    <br>
-    <h5> Die Temperatur beträgt {{response.main["temp"]}}°C ! </h5>
+
+
 
 
 {% endblock %}
