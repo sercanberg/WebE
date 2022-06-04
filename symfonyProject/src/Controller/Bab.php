@@ -18,7 +18,8 @@ class Bab extends AbstractController
     public function number(ManagerRegistry $doctrine): Response
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=48&lon=8&appid=52f93fcb3972dd3f203176c66178aa35');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=83&lon=-32&appid=52f93fcb3972dd3f203176c66178aa35');
+        // Grönland = lat=83&lon=-32 ; Mannheim lat=49.5&lon=8.5
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
         $contentType = $response->getHeaders()['content-type'][0];
