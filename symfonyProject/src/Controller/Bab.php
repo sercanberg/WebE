@@ -18,7 +18,7 @@ class Bab extends AbstractController
     public function number(ManagerRegistry $doctrine): Response
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=83&lon=-32&appid=52f93fcb3972dd3f203176c66178aa35');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=49.5&lon=8.5&appid=52f93fcb3972dd3f203176c66178aa35');
         // Grönland = lat=83&lon=-32 ; Mannheim lat=49.5&lon=8.5
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
@@ -33,21 +33,21 @@ class Bab extends AbstractController
         $sky = $content["weather"]["0"]["main"];
 
         if ($sky == "Rain"){
-            echo 'its Raining';
+            #echo 'its Raining';
             $weather = "Regen";
         }
         else {
             if($tempe <= 10){
-                echo "UAAAAA";
+            #    echo "UAAAAA";
                 $weather = "Kalt";
             }
-            elseif($tempe <= 25){
-                echo "MUAAA";
-                $weather = "Normal";
-            }
+           # elseif($tempe <= 25){
+            #    echo "MUAAA";
+             #   $weather = "Normal";
+            #}
             else{
-                echo "I am melting";
-                $weather = "Warm";
+                #echo "I am melting";
+                $weather = "Normal";
             }
         }
 

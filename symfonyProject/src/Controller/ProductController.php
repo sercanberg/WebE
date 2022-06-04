@@ -17,11 +17,12 @@ class ProductController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $product = new Products();
-        $product->setName('T-shirt Schwarz');
-        $product->setPrice(30);
-        $product->setWeather('Normal');
-        $product->setCategorie('Oberteile');
-        $product->setPicture('Tshirt2.jpg');
+        $product->setName('Gummistiefel');
+        $product->setPrice(40);
+        $product->setWeather('Regen');
+        $product->setCategorie('Schuhe');
+        $product->setPicture('Gummistiefel.jpg');
+        #$product->setStyle('Herren');
 // erzähle der Doctrine, dass Sie das Produkt speichern wollen
         $entityManager->persist($product);
 // führt die aktuelle Anfrage aus
