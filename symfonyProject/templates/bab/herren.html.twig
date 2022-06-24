@@ -32,15 +32,16 @@
         </div>
     </div>
     <br>
+    <h1>Passende Herrenkleidung gesucht?</h1>
     <br>
     <div class="row" style="text-align:center">
-        {% for article in articles %}
-            <div class="col">
+        {% for article in products %}
+            <div class="col-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="/images/sdf.png" class="card-img-top">
+                    <img src="/images/{{ article.picture }}" class="card-img-top" height="275">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text">{{ article.body }}</p>
+                        <h5 class="card-title">{{ article.name }}</h5>
+                        <p class="card-text">{{ article.price}}</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>

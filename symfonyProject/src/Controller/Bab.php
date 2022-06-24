@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use PhpParser\Node\Expr\Array_;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,13 +13,10 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class Bab extends AbstractController
 {
-    /**
-     * @Route("/bab")
-     */
-    public function number(ManagerRegistry $doctrine): Response
+    public function weatherdata(): string
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=83&lon=-32&appid=52f93fcb3972dd3f203176c66178aa35');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=49.5&lon=8.5&appid=52f93fcb3972dd3f203176c66178aa35');
         // Grönland = lat=83&lon=-32 ; Mannheim lat=49.5&lon=8.5
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
@@ -38,39 +36,36 @@ class Bab extends AbstractController
         }
         else {
             if($tempe <= 10){
-            #    echo "UAAAAA";
+                #    echo "UAAAAA";
                 $weather = "Kalt";
             }
-           # elseif($tempe <= 25){
+            # elseif($tempe <= 25){
             #    echo "MUAAA";
-             #   $weather = "Normal";
+            #   $weather = "Normal";
             #}
             else{
                 #echo "I am melting";
                 $weather = "Normal";
             }
         }
+        return $weather;
+    }
 
-        $repository= $doctrine->getRepository(Products::class);
 
+    /**
+     * @Route("/bab")
+     */
+    public function number(ManagerRegistry $doctrine): Response
+    {
+        $weather = $this->weatherdata();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
                 'weather' => $weather,
             ]);
-
-
-
-
-
-
-        $articles = [
-            '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
-            '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
-            '2' => ['title' => 'Herbst', 'body' => 'Der Herbst wird...'],
-            '3' => ['title' => 'Winter', 'body' => 'Der Winter war...']
-        ];
+        if (count($products)>=4){
+            $products = array_slice($products, 0, 4);
+        };
         return $this->render('bab/first.html.twig', [
-            'articles' => $articles,
             'products' => $products
         ]);
     }
@@ -79,18 +74,25 @@ class Bab extends AbstractController
      */
     public function number1(ManagerRegistry $doctrine): Response
     {
+        $weather = $this->weatherdata();
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'weather' => $weather,
+                'style' => 'Herren'
 
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'weather' => $weather,
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        if (count($products)>=4){
+            $products = array_slice($products, 0, 4);
+        };
 
-
-        $articles = [
-            '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
-            '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
-            '2' => ['title' => 'Herbst', 'body' => 'Der Herbst wird...'],
-            '3' => ['title' => 'Winter', 'body' => 'Der Winter war...']
-        ];
         return $this->render('bab/herren.html.twig', [
-            'articles' => $articles
-
+            'products' => $products
         ]);
     }
     /**
