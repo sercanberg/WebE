@@ -145,7 +145,7 @@ class Bab extends AbstractController
     }
 
     /**
-    * @Route("/hr_ac")
+    * @Route("/herren/accessoires")
     */
     public function number4(ManagerRegistry $doctrine): Response
     {
@@ -168,20 +168,18 @@ class Bab extends AbstractController
             $products = array_slice($products, 0, 3);
         };
 
-        return $this->render('bab/hr_ac.html.twig', [
+        return $this->render('bab/herren/hr_ac.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/hr_ob")
+     * @Route("/herren/oberteile")
      */
     public function number5(ManagerRegistry $doctrine): Response
     {
 
-        $repository= $doctrine->getRepository(Products::class);
-
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Oberteile",
@@ -197,20 +195,18 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/hr_ob.html.twig', [
+        return $this->render('bab/herren/hr_ob.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/hr_ho")
+     * @Route("/herren/hosen")
      */
     public function number6(ManagerRegistry $doctrine): Response
     {
 
-        $repository= $doctrine->getRepository(Products::class);
-
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Hosen",
@@ -226,19 +222,17 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/hr_ho.html.twig', [
+        return $this->render('bab/herren/hr_ho.html.twig', [
             'articles' => $products
 
         ]);
     }
     /**
-     * @Route("/hr_sc")
+     * @Route("/herren/schuhe")
      */
     public function number7(ManagerRegistry $doctrine): Response
     {
 
-        $repository= $doctrine->getRepository(Products::class);
-
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Schuhe",
@@ -254,14 +248,14 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/hr_ho.html.twig', [
+        return $this->render('bab/herren/hr_ho.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/da_ac")
+     * @Route("/damen/accessoires")
      */
     public function number8(ManagerRegistry $doctrine): Response
     {
@@ -284,14 +278,14 @@ class Bab extends AbstractController
             $products = array_slice($products, 0, 3);
         };
 
-        return $this->render('bab/da_ac.html.twig', [
+        return $this->render('bab/damen/da_ac.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/da_ob")
+     * @Route("/damen/oberteile")
      */
     public function number9(ManagerRegistry $doctrine): Response
     {
@@ -313,14 +307,14 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/da_ob.html.twig', [
+        return $this->render('bab/damen/da_ob.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/da_ho")
+     * @Route("/damen/hosen")
      */
     public function number10(ManagerRegistry $doctrine): Response
     {
@@ -342,13 +336,13 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/da_ho.html.twig', [
+        return $this->render('bab/damen/da_ho.html.twig', [
             'articles' => $products
 
         ]);
     }
     /**
-     * @Route("/da_sc")
+     * @Route("/damen/schuhe")
      */
     public function number11(ManagerRegistry $doctrine): Response
     {
@@ -370,14 +364,14 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/da_sc.html.twig', [
+        return $this->render('bab/damen/da_sc.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/ki_ac")
+     * @Route("/kinder/accessoires")
      */
     public function number12(ManagerRegistry $doctrine): Response
     {
@@ -392,14 +386,14 @@ class Bab extends AbstractController
             $products = array_slice($products, 0, 3);
         };
 
-        return $this->render('bab/ki_ac.html.twig', [
+        return $this->render('bab/kinder/ki_ac.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/ki_ob")
+     * @Route("/kinder/oberteile")
      */
     public function number13(ManagerRegistry $doctrine): Response
     {
@@ -413,14 +407,14 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/ki_ob.html.twig', [
+        return $this->render('bab/kinder/ki_ob.html.twig', [
             'articles' => $products
 
         ]);
     }
 
     /**
-     * @Route("/ki_ho")
+     * @Route("/kinder/hosen")
      */
     public function number14(ManagerRegistry $doctrine): Response
     {
@@ -434,13 +428,13 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/ki_ho.html.twig', [
+        return $this->render('bab/kinder/ki_ho.html.twig', [
             'articles' => $products
 
         ]);
     }
     /**
-     * @Route("/ki_sc")
+     * @Route("/kinder/schuhe")
      */
     public function number15(ManagerRegistry $doctrine): Response
     {
@@ -454,7 +448,28 @@ class Bab extends AbstractController
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
-        return $this->render('bab/ki_sc.html.twig', [
+        return $this->render('bab/kinder/ki_sc.html.twig', [
+            'articles' => $products
+
+        ]);
+    }
+
+    /**
+     * @Route("/warenkorb")
+     */
+    public function number16(ManagerRegistry $doctrine): Response
+    {
+
+        $products= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Schuhe",
+                'style' => 'Kinder'
+
+            ]);
+        if (count($products)>=3){
+            $products = array_slice($products, 0, 3);
+        };
+        return $this->render('bab/warenkorb.html.twig', [
             'articles' => $products
 
         ]);
