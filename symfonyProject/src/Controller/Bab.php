@@ -131,15 +131,80 @@ class Bab extends AbstractController
     public function number4(ManagerRegistry $doctrine): Response
     {
 
-        $articles = [
-        '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
-        '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
-        '2' => ['title' => 'Herbst', 'body' => 'Der Herbst wird...'],
-        '3' => ['title' => 'Winter', 'body' => 'Der Winter war...']
-        ];
+        $repository= $doctrine->getRepository(Products::class);
+
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Accessoires",
+                'style' => 'Herren'
+
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Accessoires",
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        if (count($products)>=3){
+            $products = array_slice($products, 0, 3);
+        };
+
         return $this->render('bab/hr_ac.html.twig', [
-            'articles' => $articles
+            'articles' => $products
 
         ]);
     }
+
+    /**
+     * @Route("/hr_ob")
+     */
+    public function number5(ManagerRegistry $doctrine): Response
+    {
+
+        $repository= $doctrine->getRepository(Products::class);
+
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Oberteile",
+                'style' => 'Herren'
+
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Oberteile",
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        return $this->render('bab/hr_ob.html.twig', [
+            'articles' => $products
+
+        ]);
+    }
+
+    /**
+     * @Route("/hr_ho")
+     */
+    public function number6(ManagerRegistry $doctrine): Response
+    {
+
+        $repository= $doctrine->getRepository(Products::class);
+
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Hosen",
+                'style' => 'Herren'
+
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Hosen",
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        return $this->render('bab/hr_ho.html.twig', [
+            'articles' => $products
+
+        ]);
+    }
+
 }
