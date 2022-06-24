@@ -1,7 +1,6 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}Blog Index{% endblock %}
 {% block page_contents %}
-
     <div class="container" style="text-align:center">
     <br>
     <div class="row align-items-start">
@@ -12,38 +11,45 @@
             <h3><a href="/damen" class="link-dark"> Damen</a></h3>
         </div>
         <div class="col" >
-            <h3><a href="/kinder"class="link-blue"> Kinder</a></h3>
+            <h3><a href="/kinder" class="link-blue"> Kinder</a></h3>
         </div>
     </div>
     <br>
+    <br>
+
     <div class="row justify-content-start">
         <div class="col-2">
             <nav class="nav flex-column">
-                <a class="nav-link" href="#">Accessoires</a>
-                <a class="nav-link" href="#">Oberteile</a>
-                <a class="nav-link" href="#">Hose</a>
-                <a class="nav-link" href="#">Schuhe</a>
+                <a class="nav-link" style="color: black" href="/ki_ac">Accessoires</a>
+                <a class="nav-link" style="color: black" href="/ki_ob">Oberteile</a>
+                <a class="nav-link" style="color: black" href="/ki_ho">Hose</a>
+                <a class="nav-link" style="color: black" href="/ki_sc">Schuhe</a>
 
             </nav>
         </div>
         <div class="col-9">
-            <img src="/images/kleidungHaupt.jpg" class="card-img-top" alt="..." height="420">
+            <img src="/images/Kinder.jpg" class="card-img-top" alt="..." height="500">
         </div>
     </div>
     <br>
+    <h1>Passende Kinderkleidung gesucht?</h1>
     <br>
     <div class="row" style="text-align:center">
-        {% for article in articles %}
-            <div class="col">
+        {% for article in products %}
+            <div class="col-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="/images/season.png" class="card-img-top">
+                    <img src="/images/{{ article.picture }}" class="card-img-top" height="275">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text">{{ article.body}}</p>
+                        <h5 class="card-title">{{ article.name }}</h5>
+                        <p class="card-text">{{ article.price}}</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+
+
+
 {% endblock %}
