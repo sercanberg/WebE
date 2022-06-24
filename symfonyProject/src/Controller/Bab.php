@@ -98,16 +98,27 @@ class Bab extends AbstractController
     /**
      * @Route("/damen")
      */
-    public function number2(): Response
+    public function number2(ManagerRegistry $doctrine): Response
     {
-        $articles = [
-            '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
-            '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
-            '2' => ['title' => 'Herbst', 'body' => 'Der Herbst wird...'],
-            '3' => ['title' => 'Winter', 'body' => 'Der Winter war...']
-        ];
+        $weather = $this->weatherdata();
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'weather' => $weather,
+                'style' => 'Damen'
+
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'weather' => $weather,
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        if (count($products)>=4){
+            $products = array_slice($products, 0, 4);
+        };
+
         return $this->render('bab/damen.html.twig', [
-            'articles' => $articles
+            'products' => $products
         ]);
     }
 
