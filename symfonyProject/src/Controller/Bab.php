@@ -206,5 +206,30 @@ class Bab extends AbstractController
 
         ]);
     }
+    /**
+     * @Route("/hr_sc")
+     */
+    public function number7(ManagerRegistry $doctrine): Response
+    {
+
+        $repository= $doctrine->getRepository(Products::class);
+
+        $products1= $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Schuhe",
+                'style' => 'Herren'
+
+            ]);
+        $products2 = $doctrine->getRepository(Products::class)->findBy(
+            [
+                'categorie' => "Schuhe",
+                'style' => 'Unisex'
+            ]);
+        $products = array_merge($products1, $products2);
+        return $this->render('bab/hr_ho.html.twig', [
+            'articles' => $products
+
+        ]);
+    }
 
 }
