@@ -28,8 +28,8 @@ class Products
     #[ORM\Column(type: 'integer')]
     private $price;
 
-    ##[ORM\Column(type: 'string', length: 255)]
-    #private $style;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $style;
 
     public function getId(): ?int
     {
@@ -96,15 +96,15 @@ class Products
         return $this;
     }
 
-    #public function getStyle(): ?string
-    #{##
-    #    return $this->style;
-   # }
+    public function getStyle(): ?string
+    {
+        return $this->style;
+   }
 
-    #public function setStyle(string $style): self
-    #{
-     #   $this->style = $style;
-#
- #       return $this;
-  #  }
+    public function setStyle(string $style): self
+    {
+        $this->style = $style;
+
+        return $this;
+    }
 }

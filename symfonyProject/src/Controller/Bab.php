@@ -18,7 +18,7 @@ class Bab extends AbstractController
     public function number(ManagerRegistry $doctrine): Response
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=49.5&lon=8.5&appid=52f93fcb3972dd3f203176c66178aa35');
+        $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=83&lon=-32&appid=52f93fcb3972dd3f203176c66178aa35');
         // Grönland = lat=83&lon=-32 ; Mannheim lat=49.5&lon=8.5
         $statusCode = $response->getStatusCode();
         // $statusCode = 200
@@ -122,6 +122,24 @@ class Bab extends AbstractController
         ];
         return $this->render('bab/kinder.html.twig', [
             'articles' => $articles
+        ]);
+    }
+
+    /**
+    * @Route("/hr_ac")
+    */
+    public function number4(ManagerRegistry $doctrine): Response
+    {
+
+        $articles = [
+        '0' => ['title' => 'Frühling', 'body' => 'Der Frühling beginnt ...'],
+        '1' => ['title' => 'Sommer', 'body' => 'Der Sommert ist ...'],
+        '2' => ['title' => 'Herbst', 'body' => 'Der Herbst wird...'],
+        '3' => ['title' => 'Winter', 'body' => 'Der Winter war...']
+        ];
+        return $this->render('bab/hr_ac.html.twig', [
+            'articles' => $articles
+
         ]);
     }
 }

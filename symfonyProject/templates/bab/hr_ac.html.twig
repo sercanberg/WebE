@@ -1,0 +1,46 @@
+{% extends 'bab/layout.html.twig' %}
+{% block title %}Blog Index{% endblock %}
+{% block page_contents %}
+
+    <div class="container" style="text-align:center">
+    <br>
+    <div class="row align-items-start">
+        <div class="col" >
+            <h3><a href="/herren"class="link-blue"> Herren</a></h3>
+        </div>
+        <div class="col" >
+            <h3><a href="/damen" class="link-dark"> Damen</a></h3>
+        </div>
+        <div class="col" >
+            <h3><a href="/kinder"class="link-dark"> Kinder</a></h3>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-start">
+        <div class="col-2">
+            <nav class="nav flex-column">
+                <a class="nav-link" href="/hr_ac">Accessoires</a>
+                <a class="nav-link" href="#">Oberteile</a>
+                <a class="nav-link" href="#">Hose</a>
+                <a class="nav-link" href="#">Schuhe</a>
+
+            </nav>
+        </div>
+        <div class="row" style="text-align:center">
+            {% for article in articles %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/images/sdf.png" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.body }}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
