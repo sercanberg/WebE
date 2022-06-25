@@ -2,6 +2,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}Hello LoginController!{% endblock %}
 {% block content %}
+    <nav class="navbar bg-light">
+        <div class="container">
+            <a href="/bab" class="navbar-brand">
+                <img src="/images/sdf.png" alt="" width="50" height="24">
+            </a>
+        </div>
+    </nav>
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
