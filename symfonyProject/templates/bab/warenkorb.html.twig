@@ -1,6 +1,7 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}Blog Index{% endblock %}
 {% block page_contents %}
+
     <script> $a = 0;</script>
     {% if products|length > 0 %}
         {% for i in 0..products|length-1 %}
@@ -18,8 +19,8 @@
                 </div>
                 <div class="col-2">
                     <a >Anzahl: {{ amounts[i]}} </a>
-                    <a href="/add/{{ products[i].id }}" class="btn btn-success">+</a>
-                    <a href="/delete/{{ products[i].id }}" class="btn btn-danger">-</a>
+                    <a href="/add/{{ products[i].id }}" class="btn btn-success" ><i class="fa fa-plus"></i></a>
+                    <a href="/delete/{{ products[i].id }}" class="btn btn-danger" ><i class="fa fa-minus"></i></a>
                 </div>
 
 
