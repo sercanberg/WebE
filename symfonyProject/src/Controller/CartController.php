@@ -122,8 +122,31 @@ class CartController extends AbstractController
             [
                 'productid' => $id
             ]);
-        $entityManager->remove($product["0"]);
+        if ($product["0"]-> {"amount"} == 1){
+            $entityManager->remove($product["0"]);
+        }
+        else{
+            $new_amount = $product["0"]-> {"amount"} - 1;
+            $product["0"]-> setAmount($new_amount);
+        }
         $entityManager->flush();
         return $this->forward('App\Controller\CartController::number17');
     }
+    /**
+     * @Route("/add/{id}")
+     */
+    public function additem(ManagerRegistry $doctrine, $id): Response{
+        $in_cart= $doctrine->getRepository(Cart::class)->findBy(
+            [
+                'productid' => $id,
+            ]);
+        # Increase amount
+        $entityManager = $doctrine->getManager();
+        $new_amount = $in_cart["0"]-> {"amount"} + 1;
+        $in_cart["0"]-> setAmount($new_amount);
+        $entityManager->flush();
+
+        return $this->forward('App\Controller\CartController::number17');
+    }
+
 }
