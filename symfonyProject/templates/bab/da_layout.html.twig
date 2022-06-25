@@ -47,8 +47,8 @@
                     <img src="/images/{{article.picture}}" class="card-img-top" height="275">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.name }}</h5>
-                        <p class="card-text">{{ article.price }}</p>
-                        <a href="#" class="btn btn-success">In den Warenkorb</a>
+                        <p class="card-text">{{ article.price }}€</p>
+                        <a href="/warenkorb/{{ article.id }}" class="btn btn-success">In den Warenkorb</a>
                     </div>
                 </div>
             </div>

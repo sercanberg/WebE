@@ -455,22 +455,20 @@ class Bab extends AbstractController
     }
 
     /**
-     * @Route("/warenkorb")
+     * @Route("/warenkorb/{id}", defaults={"page": 12, "title": "Hello world!"})
      */
-    public function number16(ManagerRegistry $doctrine): Response
+    public function number16(ManagerRegistry $doctrine, $id): Response
     {
 
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
-                'categorie' => "Schuhe",
-                'style' => 'Kinder'
-
+                'id' => $id,
             ]);
         if (count($products)>=3){
             $products = array_slice($products, 0, 3);
         };
         return $this->render('bab/warenkorb.html.twig', [
-            'articles' => $products
+            'products' => $products
 
         ]);
     }
