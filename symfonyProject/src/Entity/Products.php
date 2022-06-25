@@ -26,7 +26,7 @@ class Products
     private $picture;
 
     #[ORM\Column(type: 'integer')]
-    private $price;
+    public $price;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $style;

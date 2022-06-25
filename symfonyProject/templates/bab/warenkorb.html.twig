@@ -1,18 +1,42 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}Blog Index{% endblock %}
 {% block page_contents %}
-    <div class="row" style="text-align:center">
+    <script> $a = 0</script>
         {% for article in products %}
-            <div class="col-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="/images/{{ article.picture }}" class="card-img-top" height="275">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ article.name}}</h5>
-                        <p class="card-text">{{ article.price}} €</p>
-                        <a href="#" class="btn btn-success">In den Warenkorb</a>
-                    </div>
+            <div class="row">
+                <div class="col-2">
                 </div>
+                <div class="col-1">
+                    <img src="/images/{{ article.picture }}" class="card-img-top" height="100">
+                </div>
+                <div class="col-2">
+                    <h5 class="card-title">{{ article.name}}</h5>
+                </div>
+                <div class="col-2">
+                    <p class="card-text">{{ article.price}} €</p>
+                </div>
+                <div class="col-2">
+                    <a href="/delete/{{ article.id }}" class="btn btn-danger">Löschen</a>
+                </div>
+                <script> $a = 1</script>
             </div>
         {% endfor %}
+    <div class="row">
+    <div class="col-5">
     </div>
+    <div class="col-2">
+        <p id="demo"></p>
+    </div>
+    </div>
+    <script> if ($a == 1){
+        document.getElementById("demo").innerHTML = "Gesamtpreis: {{ price }}€";
+        document.write('<div class="row"> <div class="col-5"> </div> <div class="col-2"> <a href="/finish" class="btn btn-success">Bestellen</a> </div>');
+    }
+    else {
+        document.getElementById("demo").innerHTML = "Es keine Produkte im Warenkorb";
+        document.write('<div class="row"> <div class="col-5"> </div> <div class="col-2"> <a href="/bab" class="btn btn-warning">Zurück zum Shop</a> </div>');
+        }
+    </script>
+   
+
 {% endblock %}
