@@ -17,7 +17,7 @@ class Cart
     public $productid;
 
     #[ORM\Column(type: 'integer')]
-    private $amount;
+    public $amount;
 
     public function getId(): ?int
     {

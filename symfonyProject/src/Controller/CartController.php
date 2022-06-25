@@ -33,13 +33,25 @@ class CartController extends AbstractController
      */
     public function number16(ManagerRegistry $doctrine, $id): Response
     {
+        $in_cart= $doctrine->getRepository(Cart::class)->findBy(
+            [
+                'productid' => $id,
+            ]);
+        # Add to cart or increase amount
         $entityManager = $doctrine->getManager();
-        $product = new Cart();
-        $product->setProductId($id);
-        $product->setAmount(1);
-        $entityManager->persist($product);
-        $entityManager->flush();
+        if ($in_cart != null){
+            $newamount = $in_cart["0"]-> {"amount"} + 1;
+            $in_cart["0"]-> setAmount($newamount);
+        }
+        else{
 
+            $product = new Cart();
+            $product->setProductId($id);
+            $product->setAmount(1);
+            $entityManager->persist($product);
+        }
+        $entityManager->flush();
+        # show product
         $product= $doctrine->getRepository(Products::class)->findBy(
             [
                 'id' => $id,
@@ -59,22 +71,28 @@ class CartController extends AbstractController
 
         $products= $doctrine->getRepository(Cart::class)->findAll();
         $art = array();
+        $amount = array();
         foreach ($products as $product) {
             $artnew= $doctrine->getRepository(Products::class)->findBy(
                 [
                     'id' => $product -> {"productid"},
                 ]);
+            $amountnew = array(
+                $product -> {"amount"},
+            );
+            $amount = array_merge($amount, $amountnew);
             $art = array_merge($art, $artnew);
         }
-        $price = 0;
-        foreach ($art as $articles){
-            $price += $articles -> {"price"};
 
+        $price = 0;
+        for ($i = 0; $i < count($art); $i++) {
+            $price += $art[$i]-> {"price"} * $amount[$i];
         }
-        //print_r($art);
+
         return $this->render('bab/warenkorb.html.twig', [
             'products' => $art,
-            'price' => $price
+            'price' => $price,
+            'amounts' => $amount
 
         ]);
     }
