@@ -9,3 +9,6 @@ kernel:
 app_logout:
     path: /logout
     methods: GET
+
+app_warenkorb:
+    path: /warenkorb

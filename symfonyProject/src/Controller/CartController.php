@@ -133,7 +133,7 @@ class CartController extends AbstractController
             $product["0"]-> setAmount($new_amount);
         }
         $entityManager->flush();
-        return $this->forward('App\Controller\CartController::cart');
+        return $this->redirectToRoute('app_warenkorb');
     }
     /**
      * @Route("/add/{id}")
@@ -151,7 +151,7 @@ class CartController extends AbstractController
         $in_cart["0"]-> setAmount($new_amount);
         $entityManager->flush();
 
-        return $this->forward('App\Controller\CartController::cart');
+        return $this->redirectToRoute('app_warenkorb');
     }
     /**
      * @Route("/delete-all/{id}")
@@ -167,7 +167,7 @@ class CartController extends AbstractController
             ]);
         $entityManager->remove($product["0"]);
         $entityManager->flush();
-        return $this->forward('App\Controller\CartController::cart');
+        return $this->redirectToRoute('app_warenkorb');
     }
 
 }

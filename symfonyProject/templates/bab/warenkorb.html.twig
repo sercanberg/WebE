@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-2">
 
-                    <a >{{ amounts[i]}} </a>
+                    <a >{{ amounts[i]}} &nbsp</a>
                     <a href="/add/{{ products[i].id }}" class="btn btn-success" id="add_item" ><i class="fa fa-plus"></i></a>
                     <a href="/delete/{{ products[i].id }}" class="btn btn-danger" id="del_item"><i class="fa fa-minus"></i></a>
                 </div>
@@ -68,20 +68,27 @@
         <p id="demo"></p>
     </div>
     </div>
-    <script> if ($a == 1){
-        document.getElementById("demo").innerHTML = "Gesamtpreis: {{ price }}€";
-        document.write('<div class="row"> <div class="col-5"> </div> <div class="col-2"> <a href="/finish" class="btn btn-success">Bestellen</a> </div>');
-    }
-    else {
+    <script> if ($a == 0){
         document.getElementById("demo").innerHTML = "Es sind keine Produkte im Warenkorb";
-        }
+    }
     </script>
+    <br>
     <div class="row">
         <div class="col-2">
         </div>
-        <div class="col-4">
+        <div class="col-5">
             <a href="/bab" class="btn btn-warning">Zurück zum Shop</a>
         </div>
+
+        {% if products|length > 0 %}
+
+        <div class="col-2">
+            <h6>Einkaufswert: {{ price }}€</h6>
+        </div>
+        <div class="col-1">
+            <a href="/finish" class="btn btn-success">Bestellen</a>
+        </div>
+        {% endif %}
     </div>
 
 
