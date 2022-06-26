@@ -118,10 +118,12 @@ class CartController extends AbstractController
      */
     public function clear_item(ManagerRegistry $doctrine, $id): Response
     {
+        $username = $this->get_user();
         $entityManager = $doctrine->getManager();
         $product= $doctrine->getRepository(Cart::class)->findBy(
             [
-                'productid' => $id
+                'productid' => $id,
+                'user' => $username
             ]);
         if ($product["0"]-> {"amount"} == 1){
             $entityManager->remove($product["0"]);
@@ -137,9 +139,11 @@ class CartController extends AbstractController
      * @Route("/add/{id}")
      */
     public function add_item(ManagerRegistry $doctrine, $id): Response{
+        $username = $this->get_user();
         $in_cart= $doctrine->getRepository(Cart::class)->findBy(
             [
                 'productid' => $id,
+                'user' => $username
             ]);
         # Increase amount
         $entityManager = $doctrine->getManager();
@@ -147,6 +151,22 @@ class CartController extends AbstractController
         $in_cart["0"]-> setAmount($new_amount);
         $entityManager->flush();
 
+        return $this->forward('App\Controller\CartController::cart');
+    }
+    /**
+     * @Route("/delete-all/{id}")
+     */
+    public function clear_items(ManagerRegistry $doctrine, $id): Response
+    {
+        $username = $this->get_user();
+        $entityManager = $doctrine->getManager();
+        $product= $doctrine->getRepository(Cart::class)->findBy(
+            [
+                'productid' => $id,
+                'user' => $username
+            ]);
+        $entityManager->remove($product["0"]);
+        $entityManager->flush();
         return $this->forward('App\Controller\CartController::cart');
     }
 
