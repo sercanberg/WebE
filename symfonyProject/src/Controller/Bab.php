@@ -55,7 +55,7 @@ class Bab extends AbstractController
     /**
      * @Route("/bab")
      */
-    public function number(ManagerRegistry $doctrine): Response
+    public function home(ManagerRegistry $doctrine): Response
     {
         $weather = $this->weatherdata();
         $products= $doctrine->getRepository(Products::class)->findBy(

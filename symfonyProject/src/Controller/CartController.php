@@ -11,32 +11,29 @@ use App\Entity\Cart;
 use Doctrine\Persistence\ManagerRegistry;
 class CartController extends AbstractController
 {
-    /**
-     * @Route("/in_cart")
-     */
-    public function insertProduct(ManagerRegistry $doctrine): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $product = new Cart();
-        $product->setProductId(1);
-        $product->setAmount(1);
-// erzähle der Doctrine, dass Sie das Produkt speichern wollen
-        $entityManager->persist($product);
-// führt die aktuelle Anfrage aus
-        $entityManager->flush();
-// gibt die aktuelle ID zurück
-        return new Response('Neues Produkt mit der id ' . $product->getId() . ' gespeichert.');
+    public function get_user(): string{
+        $user = $this->getUser();
+        if ($user == null){
+            $username = "n/a";
+        }
+        else{
+            $username = $user -> {"username"};
+        }
+        return $username;
     }
 
     /**
      * @Route("/warenkorb/{id}", defaults={"page": 12, "title": "Hello world!"})
      */
-    public function number16(ManagerRegistry $doctrine, $id): Response
+    public function add_to_cart(ManagerRegistry $doctrine, $id): Response
     {
+        $username = $this->get_user();
         $in_cart= $doctrine->getRepository(Cart::class)->findBy(
             [
                 'productid' => $id,
+                'user' => $username
             ]);
+
         # Add to cart or increase amount
         $entityManager = $doctrine->getManager();
         if ($in_cart != null){
@@ -48,6 +45,7 @@ class CartController extends AbstractController
             $product = new Cart();
             $product->setProductId($id);
             $product->setAmount(1);
+            $product->setUser($username);
             $entityManager->persist($product);
         }
         $entityManager->flush();
@@ -66,10 +64,13 @@ class CartController extends AbstractController
     /**
      * @Route("/warenkorb", defaults={"page": 12, "title": "Hello world!"})
      */
-    public function number17(ManagerRegistry $doctrine): Response
+    public function cart(ManagerRegistry $doctrine): Response
     {
-
-        $products= $doctrine->getRepository(Cart::class)->findAll();
+        $username = $this->get_user();
+        $products= $doctrine->getRepository(Cart::class)->findBy(
+            [
+            'user' => $username,
+            ]);
         $art = array();
         $amount = array();
         foreach ($products as $product) {
@@ -115,7 +116,7 @@ class CartController extends AbstractController
     /**
      * @Route("/delete/{id}", defaults={"page": 12, "title": "Hello world!"})
      */
-    public function clearitem(ManagerRegistry $doctrine, $id): Response
+    public function clear_item(ManagerRegistry $doctrine, $id): Response
     {
         $entityManager = $doctrine->getManager();
         $product= $doctrine->getRepository(Cart::class)->findBy(
@@ -130,12 +131,12 @@ class CartController extends AbstractController
             $product["0"]-> setAmount($new_amount);
         }
         $entityManager->flush();
-        return $this->forward('App\Controller\CartController::number17');
+        return $this->forward('App\Controller\CartController::cart');
     }
     /**
      * @Route("/add/{id}")
      */
-    public function additem(ManagerRegistry $doctrine, $id): Response{
+    public function add_item(ManagerRegistry $doctrine, $id): Response{
         $in_cart= $doctrine->getRepository(Cart::class)->findBy(
             [
                 'productid' => $id,
@@ -146,7 +147,7 @@ class CartController extends AbstractController
         $in_cart["0"]-> setAmount($new_amount);
         $entityManager->flush();
 
-        return $this->forward('App\Controller\CartController::number17');
+        return $this->forward('App\Controller\CartController::cart');
     }
 
 }

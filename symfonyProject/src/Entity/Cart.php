@@ -19,6 +19,9 @@ class Cart
     #[ORM\Column(type: 'integer')]
     public $amount;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Cart
     public function setAmount(int $amount): self
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser(string $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
