@@ -56,7 +56,8 @@ class CartController extends AbstractController
             ]);
 
         return $this->render('bab/in_warenkorb.html.twig', [
-            'products' => $product
+            'products' => $product,
+            'username' => $username
 
         ]);
     }
@@ -93,7 +94,8 @@ class CartController extends AbstractController
         return $this->render('bab/warenkorb.html.twig', [
             'products' => $art,
             'price' => $price,
-            'amounts' => $amount
+            'amounts' => $amount,
+            'username' => $username
 
         ]);
     }
@@ -102,6 +104,7 @@ class CartController extends AbstractController
      */
     public function cart_clear(ManagerRegistry $doctrine): Response
     {
+        $username = $this->get_user();
         $entityManager = $doctrine->getManager();
         $products= $doctrine->getRepository(Cart::class)->findAll();
         foreach ($products as $product){
@@ -109,7 +112,7 @@ class CartController extends AbstractController
         }
         $entityManager->flush();
         return $this->render('bab/finished.html.twig', [
-
+            'username' => $username
         ]);
     }
 

@@ -8,12 +8,16 @@
         </div>
     </nav>
     <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a href="/login" class="btn"><i class="fa fa-sign-in"></i> Login</a>
-        </li>
-        <li class="nav-item">
-            <a href="/logout" class="btn"><i class="fa fa-sign-out"></i> Logout</a>
-        </li>
+        {% if username == "n/a" %}
+            <li class="nav-item">
+                <a href="/login" class="btn"><i class="fa fa-sign-in"></i> Login</a>
+            </li>
+        {%  endif %}
+        {% if username != "n/a" %}
+            <li class="nav-item">
+                <a href="/logout" class="btn"><i class="fa fa-sign-out"></i> Logout</a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a href="/warenkorb" class="btn"><i class="fa fa-shopping-cart"></i> Warenkorb</a>
         </li>
@@ -44,14 +48,18 @@
             </nav>
         </div>
 
-        {% for article in articles %}
+        {% for i in 0..articles|length-1 %}
+            {% if i%3 == 0 and i != 0%}
+                <div class="col-2">
+                </div>
+            {% endif %}
             <div class="col-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="/images/{{article.picture}}" class="card-img-top" height="275">
+                    <img src="/images/{{articles[i].picture}}" class="card-img-top" height="275">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.name }}</h5>
-                        <p class="card-text">{{ article.price }}€</p>
-                        <a href="/warenkorb/{{ article.id }}" class="btn btn-success">In den Warenkorb</a>
+                        <h5 class="card-title">{{ articles[i].name }}</h5>
+                        <p class="card-text">{{ articles[i].price }}€</p>
+                        <a href="/warenkorb/{{ articles[i].id }}" class="btn btn-success">In den Warenkorb</a>
                     </div>
                 </div>
             </div>

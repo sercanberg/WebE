@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use App\Entity\Products;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Optional;
 
 
 class Bab extends AbstractController
@@ -51,12 +52,24 @@ class Bab extends AbstractController
         return $weather;
     }
 
+    public function get_user(): string{
+        $user = $this->getUser();
+        if ($user == null){
+            $username = "n/a";
+        }
+        else{
+            $username = $user -> {"username"};
+        }
+        return $username;
+    }
+
 
     /**
      * @Route("/bab")
      */
     public function home(ManagerRegistry $doctrine): Response
     {
+        $username = $this->get_user();
         $weather = $this->weatherdata();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
@@ -66,14 +79,16 @@ class Bab extends AbstractController
             $products = array_slice($products, 0, 4);
         };
         return $this->render('bab/first.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'username' => $username
         ]);
     }
     /**
      * @Route("/herren")
      */
-    public function number1(ManagerRegistry $doctrine): Response
+    public function herren_haupt(ManagerRegistry $doctrine): Response
     {
+        $username = $this->get_user();
         $weather = $this->weatherdata();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
@@ -92,14 +107,16 @@ class Bab extends AbstractController
         };
 
         return $this->render('bab/herren.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'username' => $username
         ]);
     }
     /**
      * @Route("/damen")
      */
-    public function number2(ManagerRegistry $doctrine): Response
+    public function damen_haupt(ManagerRegistry $doctrine): Response
     {
+        $username = $this->get_user();
         $weather = $this->weatherdata();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
@@ -118,15 +135,17 @@ class Bab extends AbstractController
         };
 
         return $this->render('bab/damen.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'username' => $username
         ]);
     }
 
     /**
      * @Route("/kinder")
      */
-    public function number3(ManagerRegistry $doctrine): Response
+    public function kinder_haupt(ManagerRegistry $doctrine): Response
     {
+        $username = $this->get_user();
         $weather = $this->weatherdata();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
@@ -140,18 +159,17 @@ class Bab extends AbstractController
         };
 
         return $this->render('bab/kinder.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'username' => $username
         ]);
     }
 
     /**
     * @Route("/herren/accessoires")
     */
-    public function number4(ManagerRegistry $doctrine): Response
+    public function hr_ac(ManagerRegistry $doctrine): Response
     {
-
-        $repository= $doctrine->getRepository(Products::class);
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Accessoires",
@@ -164,12 +182,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
 
         return $this->render('bab/herren/hr_ac.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -177,9 +193,9 @@ class Bab extends AbstractController
     /**
      * @Route("/herren/oberteile")
      */
-    public function number5(ManagerRegistry $doctrine): Response
+    public function hr_ob(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Oberteile",
@@ -192,11 +208,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/herren/hr_ob.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -204,9 +219,9 @@ class Bab extends AbstractController
     /**
      * @Route("/herren/hosen")
      */
-    public function number6(ManagerRegistry $doctrine): Response
+    public function hr_ho(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Hosen",
@@ -219,20 +234,19 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/herren/hr_ho.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
     /**
      * @Route("/herren/schuhe")
      */
-    public function number7(ManagerRegistry $doctrine): Response
+    public function hr_sc(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Schuhe",
@@ -245,11 +259,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/herren/hr_ho.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -257,11 +270,9 @@ class Bab extends AbstractController
     /**
      * @Route("/damen/accessoires")
      */
-    public function number8(ManagerRegistry $doctrine): Response
+    public function da_ac(ManagerRegistry $doctrine): Response
     {
-
-        $repository= $doctrine->getRepository(Products::class);
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Accessoires",
@@ -274,12 +285,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
 
         return $this->render('bab/damen/da_ac.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -287,11 +296,9 @@ class Bab extends AbstractController
     /**
      * @Route("/damen/oberteile")
      */
-    public function number9(ManagerRegistry $doctrine): Response
+    public function da_ob(ManagerRegistry $doctrine): Response
     {
-
-        $repository= $doctrine->getRepository(Products::class);
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Oberteile",
@@ -304,11 +311,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/damen/da_ob.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -316,11 +322,9 @@ class Bab extends AbstractController
     /**
      * @Route("/damen/hosen")
      */
-    public function number10(ManagerRegistry $doctrine): Response
+    public function da_ho(ManagerRegistry $doctrine): Response
     {
-
-        $repository= $doctrine->getRepository(Products::class);
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Hosen",
@@ -333,22 +337,19 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/damen/da_ho.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
     /**
      * @Route("/damen/schuhe")
      */
-    public function number11(ManagerRegistry $doctrine): Response
+    public function da_sc(ManagerRegistry $doctrine): Response
     {
-
-        $repository= $doctrine->getRepository(Products::class);
-
+        $username = $this->get_user();
         $products1= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Schuhe",
@@ -361,11 +362,10 @@ class Bab extends AbstractController
                 'style' => 'Unisex'
             ]);
         $products = array_merge($products1, $products2);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/damen/da_sc.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -373,21 +373,19 @@ class Bab extends AbstractController
     /**
      * @Route("/kinder/accessoires")
      */
-    public function number12(ManagerRegistry $doctrine): Response
+    public function ki_ac(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Accessoires",
                 'style' => 'Kinder'
 
             ]);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
 
         return $this->render('bab/kinder/ki_ac.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -395,20 +393,19 @@ class Bab extends AbstractController
     /**
      * @Route("/kinder/oberteile")
      */
-    public function number13(ManagerRegistry $doctrine): Response
+    public function ki_ob(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Oberteile",
                 'style' => 'Kinder'
 
             ]);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/kinder/ki_ob.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
@@ -416,40 +413,38 @@ class Bab extends AbstractController
     /**
      * @Route("/kinder/hosen")
      */
-    public function number14(ManagerRegistry $doctrine): Response
+    public function ki_ho(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Hosen",
                 'style' => 'Kinder'
 
             ]);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/kinder/ki_ho.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
     /**
      * @Route("/kinder/schuhe")
      */
-    public function number15(ManagerRegistry $doctrine): Response
+    public function ki_sc(ManagerRegistry $doctrine): Response
     {
-
+        $username = $this->get_user();
         $products= $doctrine->getRepository(Products::class)->findBy(
             [
                 'categorie' => "Schuhe",
                 'style' => 'Kinder'
 
             ]);
-        if (count($products)>=3){
-            $products = array_slice($products, 0, 3);
-        };
+
         return $this->render('bab/kinder/ki_sc.html.twig', [
-            'articles' => $products
+            'articles' => $products,
+            'username' => $username
 
         ]);
     }
