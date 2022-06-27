@@ -10,16 +10,16 @@
     <ul class="nav justify-content-end">
         {% if username == "n/a" %}
             <li class="nav-item">
-                <a href="/login" class="btn"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="/login" class="btn" id="login"><i class="fa fa-sign-in"></i> Login</a>
             </li>
         {%  endif %}
         {% if username != "n/a" %}
             <li class="nav-item">
-                <a href="/logout" class="btn"><i class="fa fa-sign-out"></i> Logout</a>
+                <a href="/logout" class="btn" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
             </li>
         {% endif %}
         <li class="nav-item">
-            <a href="/warenkorb" class="btn"><i class="fa fa-shopping-cart"></i> Warenkorb</a>
+            <a href="/warenkorb" class="btn" id="cart"><i class="fa fa-shopping-cart"></i> Warenkorb</a>
         </li>
     </ul>
     <div class="container" style="text-align:center">
