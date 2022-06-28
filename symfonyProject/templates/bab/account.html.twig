@@ -1,4 +1,72 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}Blog Index{% endblock %}
 {% block page_contents %}
+    {% if user != "n/a" %}
+    <div class="container">
+    <br>
+        <div class="col-2" >
+        </div>
+        <div class="col" >
+            <h3><a>Accountdaten</a></h3>
+        </div>
+    <br>
+    <br>
+        <div class="row">
+
+    <div class="col-2" >
+        <a>Benutzername:</a>
+    </div>
+        <div class="col-1" >
+            <p>{{ user.username }}</p>
+        </div>
+    </div>
+
+        <div class="row">
+
+            <div class="col-2" >
+                <a>Passwort:</a>
+            </div>
+            <div class="col-1" >
+                <p>******</p>
+            </div>
+        </div>
+        <form action="/account-set" class="form-signin" method="post">
+        <div class="row">
+
+            <div class="col-2" >
+                <a>Lieferadresse:</a>
+            </div>
+            <div class="col-3" >
+                <input type="text" id="street" name="street" class="form-control" placeholder="Straße & Hausnummer">
+            </div>
+
+            <div class="col-3" >
+                <input type="text" id="city" name="city" class="form-control" placeholder="Postleizahl & Ort">
+            </div>
+
+        </div>
+            <br>
+            <div class="col" >
+            </div>
+            <div class="col-3" >
+                <button class="btn btn-primary btn-block" type="submit">Bestätigen</button>
+            </div>
+
+        </form>
+
+    </div>
+    {% endif %}
+    {% if user == "n/a" %}
+        <div class="container">
+        <br>
+        <div class="col-2" >
+        </div>
+        <div class="col" >
+            <h5><a>Bitte melden Sie sich zuerst an</a></h5>
+        </div>
+        </div>
+    {% endif %}
+
+
+
 {% endblock %}
