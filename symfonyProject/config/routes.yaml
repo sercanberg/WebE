@@ -12,3 +12,6 @@ app_logout:
 
 app_warenkorb:
     path: /warenkorb
+
+app_account:
+    path: /account

@@ -57,14 +57,14 @@
             </div>
         </div>
         <br>
-        <form action="/account-set" class="form-signin" method="post">
+        <form action="/account-set" class="form-signin" accept-charset="utf-8" method="post">
         <div class="row">
 
             <div class="col-2" >
                 <a>Lieferadresse:</a>
             </div>
             <div class="col-3" >
-                <input type="text" id="street" name="street" class="form-control" placeholder="Straße & Hausnummer" value={{ account.street }}>
+                <input type="text" id="street" name="street" class="form-control" placeholder="Straße" minlength="3" value={{ account.street }}>
             </div>
 
             <div class="col-3" >
@@ -82,7 +82,7 @@
                     <a>DE</a>
                 </div>
                 <div class="col-4" >
-                    <input type="number" id="konto" name="konto" class="form-control" placeholder="Kontonummer" value={{ account.konto }}>
+                    <input type="number" id="konto" name="konto" class="form-control" placeholder="Kontonummer" min="1" max="7232110011111111111" value={{ account.konto }}>
                 </div>
             </div>
             <br>

@@ -43,28 +43,40 @@ class AccountController extends AbstractController
     public function acc_set(Request $request, ManagerRegistry $doctrine): Response
     {
         $content = $request -> getContent();
-        //$split = explode("=", $content);
-        //$city = $split[2];
-        //$street = explode("&", $split[1])[0];
-        //print_r($city);
-        //print_r($street);
+        $split = explode("street=", $content);
+        $split2 = explode("&city=", $split[1]);
+        $split3 = explode("&konto=", $split2[1]);
+        $streetraw = $split2[0];
+        $street = str_replace("+", "_", $streetraw);
+        $city = $split3[0];
+        $konto = $split3[1];
+
         $username = $this->get_user();
 
-        print_r($content);
 
-        $current_user= $doctrine->getRepository(User::class)->findBy(
+        $account = $doctrine->getRepository(Account::class)->findBy(
             [
                 'username' => $username
             ]);
-        if ($current_user == null){
-            $current_user = array();
-            $current_user["0"] = "n/a";
-        }
-        return $this->render('bab/account.html.twig', [
-            'username' => $username,
-            'user' => $current_user["0"]
 
-        ]);
+        $entityManager = $doctrine->getManager();
+
+        $account["0"] -> setStreet($street);
+        if ($city!= null) {
+            $account["0"]->setCity($city);
+        }
+        else{
+            $account["0"]->setCity(null);
+        }
+        if ($konto!= null) {
+            $account["0"] -> setKonto($konto);
+        }
+        else{
+            $account["0"]->setKonto(null);
+        }
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_account');
 
     }
 }
