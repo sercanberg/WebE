@@ -1,7 +1,33 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}Blog Index{% endblock %}
 {% block page_contents %}
-    {% if user != "n/a" %}
+    <style>
+        #street {
+            width: 300px;
+        }
+        #konto {
+            width: 440px;
+        }
+        #DE {
+            width: 20px;
+            padding: 6px;
+        }
+        #city {
+            width: 130px;
+        }
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    {% if username != "n/a" %}
     <div class="container">
     <br>
         <div class="col-2" >
@@ -17,10 +43,10 @@
         <a>Benutzername:</a>
     </div>
         <div class="col-1" >
-            <p>{{ user.username }}</p>
+            <p>{{ username }}</p>
         </div>
     </div>
-
+    <br>
         <div class="row">
 
             <div class="col-2" >
@@ -30,6 +56,7 @@
                 <p>******</p>
             </div>
         </div>
+        <br>
         <form action="/account-set" class="form-signin" method="post">
         <div class="row">
 
@@ -37,14 +64,27 @@
                 <a>Lieferadresse:</a>
             </div>
             <div class="col-3" >
-                <input type="text" id="street" name="street" class="form-control" placeholder="Straße & Hausnummer">
+                <input type="text" id="street" name="street" class="form-control" placeholder="Straße & Hausnummer" value={{ account.street }}>
             </div>
 
             <div class="col-3" >
-                <input type="text" id="city" name="city" class="form-control" placeholder="Postleizahl & Ort">
+                <input type="number" id="city" name="city" class="form-control" max="99999" min="1000" placeholder="Postleitzahl" value={{ account.city }}>
             </div>
 
         </div>
+            <br>
+            <div class="row">
+            <div class="col-2" >
+                <a>Kontonummer:</a>
+            </div>
+
+                <div class="col-1" id="DE" >
+                    <a>DE</a>
+                </div>
+                <div class="col-4" >
+                    <input type="number" id="konto" name="konto" class="form-control" placeholder="Kontonummer" value={{ account.konto }}>
+                </div>
+            </div>
             <br>
             <div class="col" >
             </div>
@@ -56,7 +96,7 @@
 
     </div>
     {% endif %}
-    {% if user == "n/a" %}
+    {% if username == "n/a" %}
         <div class="container">
         <br>
         <div class="col-2" >
