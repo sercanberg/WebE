@@ -1,0 +1,164 @@
+{% extends 'bab/layout.html.twig' %}
+{% block title %}Blog Index{% endblock %}
+{% block page_contents %}
+    <style>
+        #disable {
+            color: grey;
+        }
+        #save {
+            padding: 100px;
+            background-color: #5eb5e0;
+        }
+        #street {
+            width: 300px;
+        }
+        #konto {
+            width: 440px;
+        }
+        #DE {
+            width: 20px;
+            padding: 6px;
+        }
+        #city {
+            width: 130px;
+        }
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <div class="container">
+    <br>
+    <div class="col-2" >
+    </div>
+    <div class="col" >
+        <h3><a>Kasse</a></h3>
+    </div>
+    <br>
+    <br>
+        <br>
+    {% if username != "n/a" %}
+            <form action="/account-set-kasse" class="form-signin" accept-charset="utf-8" method="post">
+                <div class="row">
+
+                    <div class="col-2" >
+                        <a>Lieferadresse:</a>
+                    </div>
+                    <div class="col-3" >
+                        <input type="text" id="street" name="street" class="form-control" placeholder="Straße" minlength="3" required value={{ account.street }}>
+                    </div>
+
+                    <div class="col-3" >
+                        <input type="number" id="city" name="city" class="form-control" max="99999" min="1000" placeholder="Postleitzahl" required value={{ account.city }}>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-2" >
+                        <a>Kontonummer:</a>
+                    </div>
+
+                    <div class="col-1" id="DE" >
+                        <a>DE</a>
+                    </div>
+                    <div class="col-4" >
+                        <input type="number" id="konto" name="konto" class="form-control" placeholder="Kontonummer" required min="1" max="7232110011111111111" value={{ account.konto }}>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                <div class="col-5" >
+                </div>
+                <div class="col-2">
+                    <input type='hidden' value='0' name='save'>
+                    <input type="checkbox" value="1" id="save" name="save">
+                    <label class="form-check-label" for="save">
+                        Daten speichern
+                    </label>
+                </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1" >
+                        <h6>Einkaufswert:</h6>
+                    </div>
+                    <div class="col-4" >
+                        <h6>{{ price }}€</h6>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-success btn-block" type="submit">Bestellen</button>
+                    </div>
+                </div>
+            </form>
+
+
+    {% endif %}
+        {% if username == "n/a" %}
+        <form action="/finish" class="form-signin" accept-charset="utf-8" method="post">
+            <div class="row">
+
+                <div class="col-2" >
+                    <a>Lieferadresse:</a>
+                </div>
+                <div class="col-3" >
+                    <input type="text" id="street" name="street" class="form-control" placeholder="Straße" minlength="3" required>
+                </div>
+
+                <div class="col-3" >
+                    <input type="number" id="city" name="city" class="form-control" max="99999" min="1000" placeholder="Postleitzahl" required>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2" >
+                    <a>Kontonummer:</a>
+                </div>
+
+                <div class="col-1" id="DE" >
+                    <a>DE</a>
+                </div>
+                <div class="col-4" >
+                    <input type="number" id="konto" name="konto" class="form-control" placeholder="Kontonummer" required min="1" max="7232110011111111111">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-5" >
+                </div>
+                <div class="col-2">
+                    <input type='hidden' value='0' name='save'>
+                    <input type="checkbox" value="2" id="save" name="save" disabled>
+                    <label class="form-check-label" for="save" id="disable">
+                        Daten speichern
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-1" >
+                    <h6>Einkaufswert:</h6>
+                </div>
+                <div class="col-4" >
+                    <h6>{{ price }}€</h6>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-success btn-block" type="submit">Bestellen</button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+    </div>
+
+
+
+{% endblock %}

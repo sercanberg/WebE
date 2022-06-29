@@ -15,3 +15,6 @@ app_warenkorb:
 
 app_account:
     path: /account
+
+app_finish:
+    path: /finish

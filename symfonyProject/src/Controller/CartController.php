@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Account;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -171,6 +172,53 @@ class CartController extends AbstractController
         $entityManager->remove($product["0"]);
         $entityManager->flush();
         return $this->redirectToRoute('app_warenkorb');
+    }
+
+    /**
+     * @Route("/kasse")
+     */
+    public function kasse(ManagerRegistry $doctrine): Response
+    {
+        $username = $this->get_user();
+        $account = $doctrine->getRepository(Account::class)->findBy(
+            [
+                'username' => $username
+            ]);
+
+        if ($account == null){
+            $account = array();
+            $account["0"] = "n/a";
+        }
+        $products= $doctrine->getRepository(Cart::class)->findBy(
+            [
+                'user' => $username,
+            ]);
+        $art = array();
+        $amount = array();
+        foreach ($products as $product) {
+            $artnew= $doctrine->getRepository(Products::class)->findBy(
+                [
+                    'id' => $product -> {"productid"},
+                ]);
+            $amountnew = array(
+                $product -> {"amount"},
+            );
+            $amount = array_merge($amount, $amountnew);
+            $art = array_merge($art, $artnew);
+        }
+
+        $price = 0;
+        for ($i = 0; $i < count($art); $i++) {
+            $price += $art[$i]-> {"price"} * $amount[$i];
+        }
+        return $this->render('bab/kasse.html.twig', [
+            'products' => $art,
+            'price' => $price,
+            'amounts' => $amount,
+            'username' => $username,
+            'account' => $account["0"]
+
+        ]);
     }
 
 }
