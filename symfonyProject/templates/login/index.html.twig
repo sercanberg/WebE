@@ -1,6 +1,6 @@
 {# templates/login/index.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}BAB Login{% endblock %}
 {% block content %}
     <nav class="navbar bg-light">
         <div class="container">
@@ -15,7 +15,7 @@
     <br><br>
     <div class="container text-center" style="max-width: 300px">
         <form action="{{ path('login') }}" class="form-signin" method="post">
-            <h1 class="h3 mb-3 font-weight-normal">Bitte anmelden</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Anmelden</h1>
             <label for="username" class="sr-only">Benutzername:</label>
             <input type="text" id="username" name="_username" class="form-control" placeholder="Benutzername" value="{{ last_username }}"/>
             <br>
