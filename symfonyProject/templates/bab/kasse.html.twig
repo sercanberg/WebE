@@ -9,7 +9,7 @@
             padding: 100px;
             background-color: #5eb5e0;
         }
-        #street {
+        #street, #nm {
             width: 300px;
         }
         #konto {
@@ -52,7 +52,7 @@
                         <a>Lieferadresse:</a>
                     </div>
                     <div class="col-3" >
-                        <input type="text" id="street" name="street" class="form-control" placeholder="Straße" minlength="3" required value={{ account.street }}>
+                        <input type="text" id="street" name="street" class="form-control" placeholder="Straße" pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" minlength="3" required value={{ account.street }}>
                     </div>
 
                     <div class="col-3" >
@@ -77,11 +77,11 @@
                 <div class="row">
                 <div class="col-5" >
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <input type='hidden' value='0' name='save'>
                     <input type="checkbox" value="1" id="save" name="save">
                     <label class="form-check-label" for="save">
-                        Daten speichern
+                        Daten dauerhaft übernehmen
                     </label>
                 </div>
                 </div>
@@ -105,12 +105,21 @@
         {% if username == "n/a" %}
         <form action="/finish" class="form-signin" accept-charset="utf-8" method="post">
             <div class="row">
+            <div class="col-2" >
+                <a>Name:</a>
+            </div>
+            <div class="col-3" >
+                <input type="text" id="nm" name="nm" class="form-control"  pattern="^[a-zA-Z].[a-zA-Z]*[a-zA-Z]$" placeholder="Name" minlength="3" required>
+            </div>
+            </div>
+            <br>
+            <div class="row">
 
                 <div class="col-2" >
                     <a>Lieferadresse:</a>
                 </div>
                 <div class="col-3" >
-                    <input type="text" id="street" name="street" class="form-control" placeholder="Straße" minlength="3" required>
+                    <input type="text" id="street" name="street" class="form-control"  pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" placeholder="Straße" minlength="3" required>
                 </div>
 
                 <div class="col-3" >
@@ -135,11 +144,11 @@
             <div class="row">
                 <div class="col-5" >
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     <input type='hidden' value='0' name='save'>
                     <input type="checkbox" value="2" id="save" name="save" disabled>
                     <label class="form-check-label" for="save" id="disable">
-                        Daten speichern
+                        Daten dauerhaft übernehmen
                     </label>
                 </div>
             </div>

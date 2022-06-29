@@ -45,6 +45,7 @@ class AccountController extends AbstractController
     public function acc_set(Request $request, ManagerRegistry $doctrine): Response
     {
         $content = $request -> getContent();
+        $a = $request -> headers;
         $split = explode("street=", $content);
         $split2 = explode("&city=", $split[1]);
         $split3 = explode("&konto=", $split2[1]);
@@ -52,7 +53,8 @@ class AccountController extends AbstractController
         $street = str_replace("+", "_", $streetraw);
         $city = $split3[0];
         $konto = $split3[1];
-
+        print_r($content);
+        //print_r($a);
         $username = $this->get_user();
 
 
@@ -78,6 +80,7 @@ class AccountController extends AbstractController
         }
         $entityManager->flush();
 
+
         return $this->redirectToRoute('app_account');
 
     }
@@ -99,6 +102,7 @@ class AccountController extends AbstractController
         $street = str_replace("+", "_", $streetraw);
         $city = $split3[0];
         $konto = $split4[0];
+
 
         $username = $this->get_user();
         $account = $doctrine->getRepository(Account::class)->findBy(
@@ -124,7 +128,6 @@ class AccountController extends AbstractController
             }
             $entityManager->flush();
         }
-
 
         return $this->redirectToRoute('app_finish');
 
