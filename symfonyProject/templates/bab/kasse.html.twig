@@ -34,6 +34,8 @@
             -moz-appearance: textfield;
         }
     </style>
+
+
     <div class="container">
     <br>
     <div class="col-2" >
@@ -44,6 +46,7 @@
     <br>
     <br>
         <br>
+
     {% if username != "n/a" %}
             <form action="/account-set-kasse" class="form-signin" accept-charset="utf-8" method="post">
                 <div class="row">
@@ -52,7 +55,7 @@
                         <a>Lieferadresse:</a>
                     </div>
                     <div class="col-3" >
-                        <input type="text" id="street" name="street" class="form-control" placeholder="Straße" pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" minlength="3" required value={{ account.street }}>
+                        <input type="text" id="street" name="street" class="form-control" placeholder="Straße (keine Sonderzeichen)" pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" minlength="3" required value={{ account.street }}>
                     </div>
 
                     <div class="col-3" >
@@ -102,6 +105,7 @@
 
 
     {% endif %}
+
         {% if username == "n/a" %}
         <form action="/finish" class="form-signin" accept-charset="utf-8" method="post">
             <div class="row">
@@ -109,7 +113,7 @@
                 <a>Name:</a>
             </div>
             <div class="col-3" >
-                <input type="text" id="nm" name="nm" class="form-control"  pattern="^[a-zA-Z].[a-zA-Z]*[a-zA-Z]$" placeholder="Name" minlength="3" required>
+                <input type="text" id="nm" name="nm" class="form-control"  pattern="^[a-zA-Z].[a-zA-Z]*[a-zA-Z]$" placeholder="Name (keine Sonderzeichen)" minlength="3" required>
             </div>
             </div>
             <br>
@@ -119,7 +123,7 @@
                     <a>Lieferadresse:</a>
                 </div>
                 <div class="col-3" >
-                    <input type="text" id="street" name="street" class="form-control"  pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" placeholder="Straße" minlength="3" required>
+                    <input type="text" id="street" name="street" class="form-control"  pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" placeholder="Straße (keine Sonderzeichen)" minlength="3" required>
                 </div>
 
                 <div class="col-3" >
@@ -169,7 +173,5 @@
         {% endif %}
 
     </div>
-
-
 
 {% endblock %}

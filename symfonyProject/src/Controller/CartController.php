@@ -12,6 +12,7 @@ use App\Entity\Cart;
 use Doctrine\Persistence\ManagerRegistry;
 class CartController extends AbstractController
 {
+    # interpret username
     public function get_user(): string{
         $user = $this->getUser();
         if ($user == null){
@@ -73,6 +74,7 @@ class CartController extends AbstractController
             [
             'user' => $username,
             ]);
+        # create article and amount array
         $art = array();
         $amount = array();
         foreach ($products as $product) {
@@ -86,7 +88,7 @@ class CartController extends AbstractController
             $amount = array_merge($amount, $amountnew);
             $art = array_merge($art, $artnew);
         }
-
+        # calc price
         $price = 0;
         for ($i = 0; $i < count($art); $i++) {
             $price += $art[$i]-> {"price"} * $amount[$i];
@@ -100,6 +102,7 @@ class CartController extends AbstractController
 
         ]);
     }
+
     /**
      * @Route("/finish", defaults={"page": 12, "title": "Hello world!"})
      */
@@ -107,6 +110,7 @@ class CartController extends AbstractController
     {
         $username = $this->get_user();
         $entityManager = $doctrine->getManager();
+        # clear whole cart after the order
         $products= $doctrine->getRepository(Cart::class)->findAll();
         foreach ($products as $product){
             $entityManager->remove($product);
@@ -122,6 +126,7 @@ class CartController extends AbstractController
      */
     public function clear_item(ManagerRegistry $doctrine, $id): Response
     {
+        # minus button
         $username = $this->get_user();
         $entityManager = $doctrine->getManager();
         $product= $doctrine->getRepository(Cart::class)->findBy(
@@ -143,6 +148,7 @@ class CartController extends AbstractController
      * @Route("/add/{id}")
      */
     public function add_item(ManagerRegistry $doctrine, $id): Response{
+        # plus button
         $username = $this->get_user();
         $in_cart= $doctrine->getRepository(Cart::class)->findBy(
             [
@@ -162,6 +168,7 @@ class CartController extends AbstractController
      */
     public function clear_items(ManagerRegistry $doctrine, $id): Response
     {
+        # trash button
         $username = $this->get_user();
         $entityManager = $doctrine->getManager();
         $product= $doctrine->getRepository(Cart::class)->findBy(
@@ -179,6 +186,7 @@ class CartController extends AbstractController
      */
     public function kasse(ManagerRegistry $doctrine): Response
     {
+        # Get username and accountdata
         $username = $this->get_user();
         $account = $doctrine->getRepository(Account::class)->findBy(
             [
@@ -189,6 +197,7 @@ class CartController extends AbstractController
             $account = array();
             $account["0"] = "n/a";
         }
+        # calc price
         $products= $doctrine->getRepository(Cart::class)->findBy(
             [
                 'user' => $username,

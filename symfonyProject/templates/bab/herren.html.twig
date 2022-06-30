@@ -1,20 +1,7 @@
 {% extends 'bab/layout.html.twig' %}
 {% block title %}BAB Herrenmode{% endblock %}
 {% block page_contents %}
-<style>
-.bi.bi-star:hover{
-    color: orange;
-}
-    #stern   {
-        background-color: white;
-        color: orange;
-    border: none;
-    padding: 1px 1px;
-    font-size: 15px;
-    }
 
-
-</style>
     <div class="container" style="text-align:center">
     <br>
     <div class="row align-items-start">
@@ -46,8 +33,10 @@
         </div>
     </div>
     <br>
+
     <h1>Passende Herrenkleidung gesucht?</h1>
     <br>
+
     <div class="row" style="text-align:center">
         {% for article in products %}
             <div class="col-3">

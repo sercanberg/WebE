@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block content %}
+
     <nav class="navbar bg-light">
         <div class="container">
             <a href="/bab" class="navbar-brand">
@@ -7,6 +8,7 @@
             </a>
         </div>
     </nav>
+
     <ul class="nav justify-content-end">
         {% if username == "n/a" %}
         <li class="nav-item">
@@ -24,7 +26,6 @@
         <li class="nav-item">
             <a href="/warenkorb" class="btn" id="cart"><i class="fa fa-shopping-cart"></i> Warenkorb</a>
         </li>
-
     </ul>
     {% block page_contents %}
     {% endblock %}

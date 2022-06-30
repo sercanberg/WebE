@@ -24,6 +24,7 @@ class AccountController extends AbstractController
         }
         return $username;
     }
+
     /**
      * @Route("/account")
      */
@@ -39,11 +40,14 @@ class AccountController extends AbstractController
             'account' => $account["0"]
         ]);
     }
+
     /**
      * @Route("/account-set")
      */
     public function acc_set(Request $request, ManagerRegistry $doctrine): Response
     {
+        # change account settings (Account)
+
         $content = $request -> getContent();
         $a = $request -> headers;
         $split = explode("street=", $content);
@@ -90,6 +94,8 @@ class AccountController extends AbstractController
      */
     public function acc_set_kasse(Request $request, ManagerRegistry $doctrine): Response
     {
+        # change account settings (Kasse)
+
         # interpret form input
         $content = $request -> getContent();
         $check = substr($content, -1);

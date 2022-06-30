@@ -30,6 +30,7 @@
             -moz-appearance: textfield;
         }
     </style>
+
     {% if username != "n/a" %}
     <div class="container">
     <br>
@@ -67,7 +68,7 @@
                 <a>Lieferadresse:</a>
             </div>
             <div class="col-3" >
-                <input type="text" id="street" name="street" class="form-control"  pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" placeholder="Straße" minlength="3" value={{ account.street }}>
+                <input type="text" id="street" name="street" class="form-control"  pattern="^[a-zA-Z0-9].[a-zA-Z0-9]*[a-zA-Z0-9]$" placeholder="Straße (keine Sonderzeichen)" minlength="3" value={{ account.street }}>
             </div>
 
             <div class="col-3" >
@@ -99,6 +100,7 @@
 
     </div>
     {% endif %}
+
     {% if username == "n/a" %}
         <div class="container">
         <br>

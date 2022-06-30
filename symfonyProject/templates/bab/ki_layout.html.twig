@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}BAB Kindermode{% endblock %}
 {% block content %}
+
     <nav class="navbar bg-light">
         <div class="container">
             <a href="/bab" class="navbar-brand">
@@ -8,6 +9,7 @@
             </a>
         </div>
     </nav>
+
     <ul class="nav justify-content-end">
         {% if username == "n/a" %}
             <li class="nav-item">
@@ -26,6 +28,7 @@
             <a href="/warenkorb" class="btn" id="cart"><i class="fa fa-shopping-cart"></i> Warenkorb</a>
         </li>
     </ul>
+
     <div class="container" style="text-align:center">
     <br>
     <div class="row align-items-start">
@@ -41,6 +44,7 @@
     </div>
     <br>
     <br>
+
     <div class="row justify-content-start">
         <div class="col-2">
             <nav class="nav flex-column">

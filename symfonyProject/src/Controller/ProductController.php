@@ -15,6 +15,7 @@ class ProductController extends AbstractController
      */
     public function createProduct(ManagerRegistry $doctrine): Response
     {
+        # Nur zum Produkte erstellen
         $entityManager = $doctrine->getManager();
         $product = new Products();
         $product->setName('Frauen Kappe');
@@ -23,10 +24,7 @@ class ProductController extends AbstractController
         $product->setCategorie('Accessoires');
         $product->setPicture('f_kappe.jpeg');
         $product->setStyle('Damen');
-// erzähle der Doctrine, dass Sie das Produkt speichern wollen
         $entityManager->persist($product);
-// führt die aktuelle Anfrage aus
         $entityManager->flush();
-// gibt die aktuelle ID zurück
         return new Response('Neues Produkt mit der id ' . $product->getId() . ' gespeichert.');
     }}

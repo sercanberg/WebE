@@ -16,36 +16,26 @@ class Bab extends AbstractController
 {
     public function weatherdata(): string
     {
+        # Get weatherdata and interpret it
         $client = HttpClient::create();
         $response = $client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=49.5&lon=8.5&appid=52f93fcb3972dd3f203176c66178aa35');
         // Grönland = lat=83&lon=-32 ; Mannheim lat=49.5&lon=8.5
         $statusCode = $response->getStatusCode();
-        // $statusCode = 200
         $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
         $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
         $content["main"]["temp"]=$content["main"]["temp"]-273.15;
         $tempe = $content["main"]["temp"];
         $sky = $content["weather"]["0"]["main"];
 
         if ($sky == "Rain"){
-            #echo 'its Raining';
             $weather = "Regen";
         }
         else {
             if($tempe <= 10){
-                #    echo "UAAAAA";
                 $weather = "Kalt";
             }
-            # elseif($tempe <= 25){
-            #    echo "MUAAA";
-            #   $weather = "Normal";
-            #}
             else{
-                #echo "I am melting";
                 $weather = "Normal";
             }
         }
@@ -63,6 +53,7 @@ class Bab extends AbstractController
         return $username;
     }
 
+    # get different types of clothes depending on the site...
 
     /**
      * @Route("/bab")
