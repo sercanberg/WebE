@@ -111,7 +111,10 @@ class CartController extends AbstractController
         $username = $this->get_user();
         $entityManager = $doctrine->getManager();
         # clear whole cart after the order
-        $products= $doctrine->getRepository(Cart::class)->findAll();
+        $products= $doctrine->getRepository(Cart::class)->findBy(
+            [
+                'user' => $username
+            ]);
         foreach ($products as $product){
             $entityManager->remove($product);
         }
